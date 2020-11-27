@@ -46,3 +46,4 @@ QUERY
 Commento al commento - relazione circolare
 Generalizzazione Media -> Foto, Video, Link
 Gestione ban
+Generalizzazione -> Attivo, Cancellato (Ristrutturazione flag)
