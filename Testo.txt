@@ -1,0 +1,47 @@
+1. ABSTRACT
+2. ANALISI DEI REQUISITI
+	2.1 DESCRIZIONE
+	2.2 GLOSSARIO
+	2.3 STRUTTURAZIONE Frasi di...
+3. PROGETTAZIONE CONCETTUALE
+	3.1 LISTA DELLE ENTITA'
+	3.2 LISTA DELLE ASSOCIAZIONI
+	3.3 LISTA DELLE GENERALIZZAZIONI
+	3.4 SCHEMA ER
+4. PROGETTAZIONE LOGICA
+	4.1 ANALISI DELLE RIDONDANZE
+	4.2 ELIMINAZIONE DELLE GENERALIZZAZIONI
+	4.3 PARTIZIONAMENTO/ACCORPAMENTO DI ENTITA' E RELATIONSHIP
+	4.4 SCELTA DI IDENTIFICATORI PRIMARI
+	4.5 SCHEMA RISTRUTTURATO
+	4.6 DESCRIZIONE SCHEMA RELAZIONALE
+	4.7 VINCOLI DI INTEGRITA' REFERENZIALE
+5. QUERY E INDICE
+	5.1 QUERY
+	5.2 INDICE
+
+1.1 ABSTRACT
+Reddit è un popolare sito americano fondato nel 2005 che consente ai suoi utenti di condividere e commentare notizie di varia natura, organizzate per argomento
+all'interno di sezioni conosciute come "subreddit". Ad ogni utente, previa registrazione, viene offerta la possibilità di iscriversi ai subreddit che più lo
+interessano, creare post contententi non solo testo ma anche eventuali media come immagini, video o eventuali link a siti esterni e commentare i post degli altri utenti.
+Per valutare la qualità dei contenuti, Reddit utilizza un sistema di "upvotes" e "downvotes", ovvero voti positivi e negativi: un utente che apprezza un post od
+un commento può assegnargli un "upvote", viceversa se il contenuto è considerato fuori tema può assegnargli un "downvote", il numero di tali voti determina
+la visibilità del post o del commento stesso all'interno del sito.
+Il sito offre anche un sistema di "premi" che un utente può acquistare e assegnare ai contenuti generati da altri utenti, andando così a supportare direttamente il
+sito. Tali premi si suddividono in tre categorie che si distinguono per il loro prezzo: "Silver", "Gold" e "Platinum".
+All'atto della registrazione, all'utente viene richiesto di inserire uno username, che sarà univoco all'interno della piattaforma, ed una password.
+Tra gli utenti del sito si distinguono i moderatori, coloro responsabili della gestione di uno specifico subreddit, del quale devono sorvegliare i contenuti,
+rimuovendo eventuali post e commenti offensivi e bannando i relativi utenti. Un moderatore può nominare altri moderatori e può svolgere contemporaneamente questo
+incarico all'interno di più subreddit. Vi sono poi gli amministratori, i dipendenti del sito che possono agire in qualità moderatori all'interno di ogni subreddit.
+Qualunque utente può creare un subreddit, che deve avere un nome univoco ed un preciso tema intorno al quale verteranno i post pubblicati dagli utenti.
+Per tutelare gli utenti, subreddit e post possono essere contrassegnati come "nsfw" ("not safe for work"), nel caso il contenuto sia offensivo, volgare od esplicito.
+Infine, il sito offre anche basilari funzionalità "social": gli utenti possono scambiarsi messaggi privati ed avere una lista di amici.
+
+4.2 Eliminazione generalizzazione Amministratore -> Moderatore -> Utente
+
+QUERY
+1. Post più votati tra tutti i sub nelle ultime 24 ore (la Frontpage)
+
+Commento al commento - relazione circolare
+Generalizzazione Media -> Foto, Video, Link
+Gestione ban
