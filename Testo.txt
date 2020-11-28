@@ -38,6 +38,19 @@ Qualunque utente può creare un subreddit, che deve avere un nome univoco ed un 
 Per tutelare gli utenti, subreddit e post possono essere contrassegnati come "nsfw" ("not safe for work"), nel caso il contenuto sia offensivo, volgare od esplicito.
 Infine, il sito offre anche basilari funzionalità "social": gli utenti possono scambiarsi messaggi privati ed avere una lista di amici.
 
+2.1 DESCRIZIONE
+Si vuole realizzare una base di dati per l'organizzazione e la gestione dei dati del sito web Reddit.
+Nell'atto dell'iscrizione, l'utente che vuole registrarsi deve inserire uno username, univoco all'interno della piattaforma, ed una password personale.
+Ogni utente può creare un Subreddit, contraddistinto da:
+	- un nome univoco
+	- una descrizione dell'argomento trattato
+All'interno di un Subreddit, l'utente può creare un post, che dovrà avere:
+	- un titolo
+	- un contenuto testuale di massimo 40000 caratteri
+	- eventualmente, una o più immagini oppure un file video
+
+
+
 4.2 Eliminazione generalizzazione Amministratore -> Moderatore -> Utente
 
 QUERY
@@ -47,3 +60,4 @@ Commento al commento - relazione circolare
 Generalizzazione Media -> Foto, Video, Link
 Gestione ban
 Generalizzazione -> Attivo, Cancellato (Ristrutturazione flag)
+Relazione Moderatore che rende un utente moderatore
