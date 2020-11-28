@@ -61,3 +61,4 @@ Generalizzazione Media -> Foto, Video, Link
 Gestione ban
 Generalizzazione -> Attivo, Cancellato (Ristrutturazione flag)
 Relazione Moderatore che rende un utente moderatore
+Gestione subreddit per utenti "premium"?
