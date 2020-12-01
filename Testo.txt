@@ -22,32 +22,44 @@
 	5.2 INDICE
 
 1.1 ABSTRACT
-Reddit è un popolare sito americano fondato nel 2005 che consente ai suoi utenti di condividere e commentare notizie di varia natura, organizzate per argomento
-all'interno di sezioni conosciute come "subreddit". Ad ogni utente, previa registrazione, viene offerta la possibilità di iscriversi ai subreddit che più lo
-interessano, creare post contententi non solo testo ma anche eventuali media come immagini, video o eventuali link a siti esterni e commentare i post degli altri utenti.
-Per valutare la qualità dei contenuti, Reddit utilizza un sistema di "upvotes" e "downvotes", ovvero voti positivi e negativi: un utente che apprezza un post od
-un commento può assegnargli un "upvote", viceversa se il contenuto è considerato fuori tema può assegnargli un "downvote", il numero di tali voti determina
-la visibilità del post o del commento stesso all'interno del sito.
-Il sito offre anche un sistema di "premi" che un utente può acquistare e assegnare ai contenuti generati da altri utenti, andando così a supportare direttamente il
-sito. Tali premi si suddividono in tre categorie che si distinguono per il loro prezzo: "Silver", "Gold" e "Platinum".
+Reddit è un popolare sito americano fondato nel 2005 che consente ai suoi utenti di condividere e commentare notizie di varia natura, organizzate per argomento all'interno di sezioni conosciute come "subreddit". Ad ogni utente, previa registrazione, viene offerta la possibilità di iscriversi ai subreddit che più lo interessano, creare post contententi non solo testo ma anche eventuali media come immagini, video o eventuali link a siti esterni e commentare i post degli altri utenti.
+Per valutare la qualità dei contenuti, Reddit utilizza un sistema di "upvotes" e "downvotes", ovvero voti positivi e negativi: un utente che apprezza un post od un commento può assegnargli un "upvote", viceversa se il contenuto è considerato fuori tema può assegnargli un "downvote", il numero di tali voti determina la visibilità del post o del commento stesso all'interno del sito.
+Il sito offre anche un sistema di "premi" che un utente può acquistare e assegnare ai contenuti generati da altri utenti, andando così a supportare direttamente il sito. Tali premi si suddividono in tre categorie che si distinguono per il loro prezzo: "Silver", "Gold" e "Platinum". Un utente che possiede un award viene considerato anche un utente “premium”, al quale viene garantito accesso a subreddit riservati a questa categoria di utenti.
 All'atto della registrazione, all'utente viene richiesto di inserire uno username, che sarà univoco all'interno della piattaforma, ed una password.
-Tra gli utenti del sito si distinguono i moderatori, coloro responsabili della gestione di uno specifico subreddit, del quale devono sorvegliare i contenuti,
-rimuovendo eventuali post e commenti offensivi e bannando i relativi utenti. Un moderatore può nominare altri moderatori e può svolgere contemporaneamente questo
-incarico all'interno di più subreddit. Vi sono poi gli amministratori, i dipendenti del sito che possono agire in qualità moderatori all'interno di ogni subreddit.
-Qualunque utente può creare un subreddit, che deve avere un nome univoco ed un preciso tema intorno al quale verteranno i post pubblicati dagli utenti.
+Tra gli utenti del sito si distinguono i moderatori, coloro responsabili della gestione di uno specifico subreddit, del quale devono sorvegliare i contenuti, rimuovendo eventuali post e commenti offensivi e bannando i relativi utenti. Un moderatore può nominare altri moderatori e può svolgere contemporaneamente questo incarico all'interno di più subreddit. Vi sono poi gli amministratori, i dipendenti del sito che possono agire in qualità moderatori all'interno di ogni subreddit. Qualunque utente può creare un subreddit, che deve avere un nome univoco ed un preciso tema intorno al quale verteranno i post pubblicati dagli utenti.
 Per tutelare gli utenti, subreddit e post possono essere contrassegnati come "nsfw" ("not safe for work"), nel caso il contenuto sia offensivo, volgare od esplicito.
 Infine, il sito offre anche basilari funzionalità "social": gli utenti possono scambiarsi messaggi privati ed avere una lista di amici.
 
+2 ANALISI DEI REQUISITI
+
 2.1 DESCRIZIONE
 Si vuole realizzare una base di dati per l'organizzazione e la gestione dei dati del sito web Reddit.
-Nell'atto dell'iscrizione, l'utente che vuole registrarsi deve inserire uno username, univoco all'interno della piattaforma, ed una password personale.
-Ogni utente può creare un Subreddit, contraddistinto da:
-	- un nome univoco
-	- una descrizione dell'argomento trattato
+Nell'atto dell'iscrizione, l'utente che vuole registrarsi deve inserire:
+uno username, univoco all’interno della piattaforma
+una password personale, per poter accedere al sito
+Ogni utente registrato può creare un Subreddit, contraddistinto da:
+un nome univoco, di massimo 20 caratteri
+una descrizione dell’argomento trattato, di massimo 5120 caratteri
+la data in cui è stato creato
 All'interno di un Subreddit, l'utente può creare un post, che dovrà avere:
-	- un titolo
-	- un contenuto testuale di massimo 40000 caratteri
-	- eventualmente, una o più immagini oppure un file video
+un titolo, di massimo 300 caratteri
+un contenuto testuale, con lunghezza non superiore ai 40000 caratteri
+eventuali immagini oppure un file video
+la data di creazione
+un flag che segnali se il subreddit è riservato esclusivamente agli utenti premium
+Fondamentale è la possibilità di contrassegnare i contenuti “nsfw”, ad ogni subreddit e post dovrà quindi essere associato un flag che consenta appunto di segnalare la natura dei suoi contenuti.
+Ogni post può essere oggetto di commenti da parte della community, pertanto occorre memorizzare anche tali informazioni, sapendo che i commenti hanno una dimensione massima consentita di 10000 caratteri.
+I post ed i commenti possono essere valutati dagli utenti tramite “upvotes” e “downvotes”, occorre quindi memorizzare queste informazioni per consentire il calcolo dei voti ricevuti in totale.
+L’utente può attribuire ad un post o ad un commento un award, che dovrà essere caratterizzato da:
+tipo (tra tre possibilità: argento, oro e platino)
+prezzo
+data di acquisto
+All’interno della base di dati sarà necessario anche memorizzare i moderatori dei subreddit e gli amministratori del sito e garantire ad essi la possibilità di bannare utenti, cancellare i post o bloccare la possibilità di commentarli.
+Per ciò che concerne le funzionalità social, all’utente deve essere garantita la possibilità di inviare richieste di amicizia ad altri utenti, di conseguenza occorre memorizzare la presenza di tale vincolo di amicizia tra due utenti.
+Gli utenti possono anche scambiarsi messaggi, ogni messaggio avrà:
+un mittente ed un destinatario
+un corpo del messaggio (lunghezza massima 10000 caratteri)
+una data di invio
 
 
 
