@@ -4,7 +4,8 @@ create table utente(
 	email varchar(320) not null,
 	dataIscrizione date not null,
 	isAdmin bit default b'0' not null,
-	isDeleted bit default b'0' not null
+	isDeleted bit default b'0' not null,
+	on delete utente set isDeleted = b'1'
 );
 
 create table amicizia(
