@@ -82,7 +82,7 @@ create table votoCommento(
 	utente varchar(20) not null,
 	commento int not null,
 	valore int not null,
-	primary key(utente, commento);
+	primary key(utente, commento),
 	foreign key(utente) references utente(username) on update no action on delete no action,
 	foreign key(commento) references commento(id) on update no action on delete no action
 );
