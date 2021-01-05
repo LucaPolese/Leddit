@@ -5,7 +5,7 @@
 -- Dumped from database version 13.1
 -- Dumped by pg_dump version 13.1
 
--- Started on 2021-01-05 12:09:04
+-- Started on 2021-01-05 14:55:09
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -256,7 +256,7 @@ CREATE TABLE public.sub (
 ALTER TABLE public.sub OWNER TO postgres;
 
 --
--- TOC entry 222 (class 1259 OID 17166)
+-- TOC entry 222 (class 1259 OID 17613)
 -- Name: mediavotisub; Type: VIEW; Schema: public; Owner: postgres
 --
 
@@ -326,7 +326,7 @@ CREATE TABLE public.moderatore (
 ALTER TABLE public.moderatore OWNER TO postgres;
 
 --
--- TOC entry 223 (class 1259 OID 17171)
+-- TOC entry 223 (class 1259 OID 17618)
 -- Name: numerobanpermoderatore; Type: VIEW; Schema: public; Owner: postgres
 --
 
@@ -342,7 +342,7 @@ CREATE VIEW public.numerobanpermoderatore AS
 ALTER TABLE public.numerobanpermoderatore OWNER TO postgres;
 
 --
--- TOC entry 224 (class 1259 OID 17175)
+-- TOC entry 224 (class 1259 OID 17622)
 -- Name: numerocommentipost; Type: VIEW; Schema: public; Owner: postgres
 --
 
@@ -426,7 +426,7 @@ CREATE TABLE public.votocommento (
 ALTER TABLE public.votocommento OWNER TO postgres;
 
 --
--- TOC entry 221 (class 1259 OID 17162)
+-- TOC entry 221 (class 1259 OID 17609)
 -- Name: voticommentoutente; Type: VIEW; Schema: public; Owner: postgres
 --
 
@@ -455,7 +455,7 @@ CREATE TABLE public.votopost (
 ALTER TABLE public.votopost OWNER TO postgres;
 
 --
--- TOC entry 220 (class 1259 OID 17158)
+-- TOC entry 220 (class 1259 OID 17605)
 -- Name: votipostutente; Type: VIEW; Schema: public; Owner: postgres
 --
 
@@ -694,15 +694,15 @@ INSERT INTO public.utente VALUES ('gbleything7', 'db7WkgW04nyx', 'ttheis7@google
 INSERT INTO public.utente VALUES ('spetrashov8', 'hTIPCYJUwd', 'lhellen8@admin.ch', '2020-04-01', B'0', B'0');
 INSERT INTO public.utente VALUES ('squinet9', 'IZIPCH3qBW83', 'scrighton9@webmd.com', '2020-02-09', B'0', B'0');
 INSERT INTO public.utente VALUES ('mkornesa', 'pxCPtHkXAi', 'cdirobertoa@ustream.tv', '2020-10-28', B'0', B'0');
-INSERT INTO public.utente VALUES ('vpinchingb', 'Aakvd8MYRy', 'rkelkb@taobao.com', '2020-04-22', B'0', B'0');
 INSERT INTO public.utente VALUES ('mslineyc', '7wotXujaoliy', 'ojakovc@auda.org.au', '2020-01-31', B'0', B'0');
-INSERT INTO public.utente VALUES ('plidsterd', 'wH4IUAxrOI', 'bkoubekd@phoca.cz', '2020-08-23', B'0', B'0');
 INSERT INTO public.utente VALUES ('asawerse', 'MRd57FrdkKf', 'eleidle@usgs.gov', '2020-06-15', B'0', B'0');
 INSERT INTO public.utente VALUES ('vferrierif', 'J37u0ecD', 'mbastidef@shutterfly.com', '2020-11-11', B'0', B'0');
 INSERT INTO public.utente VALUES ('dcrunkhorng', 'ylan4PwpW2', 'acastagnerig@usatoday.com', '2020-08-16', B'0', B'0');
 INSERT INTO public.utente VALUES ('rblackhallh', 'p0tH2851tp', 'fwilcockesh@technorati.com', '2020-03-02', B'0', B'0');
 INSERT INTO public.utente VALUES ('mfitchetti', '1BuL57FMFHs', 'jruddochi@marriott.com', '2020-11-29', B'0', B'0');
 INSERT INTO public.utente VALUES ('oscrannagej', 'As2dAxD', 'wgallantj@joomla.org', '2020-01-22', B'0', B'0');
+INSERT INTO public.utente VALUES ('vpinchingb', 'Aakvd8MYRy', 'rkelkb@taobao.com', '2020-04-22', B'1', B'0');
+INSERT INTO public.utente VALUES ('plidsterd', 'wH4IUAxrOI', 'bkoubekd@phoca.cz', '2020-08-23', B'1', B'0');
 
 
 --
@@ -1197,7 +1197,7 @@ ALTER TABLE ONLY public.votopost
     ADD CONSTRAINT votopost_utente_fkey FOREIGN KEY (utente) REFERENCES public.utente(username);
 
 
--- Completed on 2021-01-05 12:09:07
+-- Completed on 2021-01-05 14:55:10
 
 --
 -- PostgreSQL database dump complete
