@@ -1257,7 +1257,7 @@ group by p.id;
 select m.tipo, titolo, creatore, numeroVoti as "voti", commenti 
 from numeroCommentiPost n join post p 
 on n.id=p.id join media m on p.id=m.id 
-where tag like '%funny%'; (si assume il termine “funny” come input dell’utente)
+where tag like '%funny%';
 
 
 -- INDICE 1
