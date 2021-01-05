@@ -1,12 +1,13 @@
 #include <iostream>
 #include <cstdio>
 #include <fstream>
+#include <iomanip>
 #include "dependences/include/libpq-fe.h"
 
 #define PG_HOST     "127.0.0.1"
 #define PG_USER     "postgres"
-#define PG_DB       "reddit"
-#define PG_PASS     "PASSWORD"
+#define PG_DB       "leddit"
+#define PG_PASS     ""
 #define PG_PORT     5432
 
 using namespace std;
@@ -37,7 +38,10 @@ int main(int argc, char*argv[]) {
     cout << " Esempio 1" << endl ;
     PGresult * res;
 
-    res = PQexec (conn , " SELECT * FROM hubs ");
+    res = PQexec (conn , " select username as \"Proprietario\", f.nome as \"Nome feed\", i.sub as \"Sub incluso\"\n"
+                         "from utente u join feed f on u.username=f.utente join include i on (f.nome=i.feed and f.utente=i.utente)\n"
+                         "group by username, f.nome, i.sub\n"
+                         "order by username, f.nome; ");
 
     checkResults(res,conn);
 
@@ -46,21 +50,20 @@ int main(int argc, char*argv[]) {
 
     // Stampo intestazioni
     for ( int i = 0; i < campi ; ++i){
-        cout << PQfname (res ,i) << "\t\t";
+        cout << PQfname(res,i) << std::setw(20);
     }
-    cout << endl;
-
+    cout << "\n" << std::setfill('-') << std::setw(60) << "-" << "\n" << std::setfill(' ');
     //stampo i valori selezionati
     for ( int i = 0; i < tuple ; ++i){
         for ( int j = 0; j < campi ; ++j){
-            cout << PQgetvalue (res , i, j) << "\t\t";
+            cout << std::setw(20) << std::left << PQgetvalue (res , i, j);
         }
-        cout << endl ;
+        cout << endl;
     }
 
     PQclear(res);
 
-    cout << " Esempio 2" << endl ;
+    /*cout << " Esempio 2" << endl ;
 
     string query = " SELECT origin , destination , departure_time , arrival_time FROM hubs JOIN legs on origin = hub WHERE country = $1 ::varchar ";
 
@@ -90,8 +93,37 @@ int main(int argc, char*argv[]) {
         myfile << endl ;
         }
     myfile.close();
-
+*/
     cout << " Complete " << endl ;
     PQfinish(conn);
     return 0;
+
+
+
+
+    //TODO: Codice da testare
+    /*int main()
+    {
+        MYSQL *conn;
+        MYSQL_RES *res;
+        MYSQL_ROW row;
+        char *server = "server";
+        char *user = "username";
+        char *password = "password";
+        char *database = "local";
+        conn = mysql_init(NULL);
+        mysql_real_connect(conn, server, user, password, database, 0, NULL, 0);
+        mysql_query(conn, "SELECT * FROM website");
+        res = mysql_use_result(conn);
+        printf("id \t date\t time \t comments\t\t user\n");
+        while ((row = mysql_fetch_row(res)) != NULL)
+        {
+            printf("%s \t %s\t %s\t %s\t\t %s\n", row[0], row[1], row[2], row[3], row[4]);
+        }
+        mysql_free_result(res);
+        mysql_close(conn);
+
+        return 0;
+    }*/
+
 }
