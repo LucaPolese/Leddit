@@ -12,16 +12,18 @@ void checkResults ( PGresult * res , const PGconn * conn ) {
     }
 }
 
-void stampaContenuto(PGresult* res, int campi,int tuple){
-    for(int i=0; i<campi ; ++i){
-        cout << PQfname(res,i) << std::setw(20);
+void stampaContenuto(PGresult* res, int tuple,int campi){
+    for(int i=0; i<campi; ++i){
+        cout << std::setw(20) << std::left << PQfname(res,i) ;
     }
+    cout << endl;
 
-    cout << "\n" << std::setfill('-') << std::setw(60) << "-" << "\n" << std::setfill(' ');
+    cout << std::setfill('-') << std::setw(20*campi) << "-" << endl;
+    cout << std::setfill(' ');
 
-    for (int i=0; i<tuple ; ++i){
-        for ( int j=0; j<campi ; ++j){
-            cout << std::setw(20) << std::left << PQgetvalue (res , i, j);
+    for (int i=0; i<tuple; ++i){
+        for ( int j=0; j<campi; ++j){
+            cout << std::setw(20) << std::left << PQgetvalue (res,i,j);
         }
         cout << endl;
     }
