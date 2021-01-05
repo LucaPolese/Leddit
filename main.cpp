@@ -1,9 +1,7 @@
 #include <iostream>
 #include <cstdio>
-#include <fstream>
 #include <iomanip>
-#include <string>
-#include "dependences/include/libpq-fe.h"
+#include "dependencies/include/libpq-fe.h"
 using namespace std;
 
 void checkResults ( PGresult * res , const PGconn * conn ) {
