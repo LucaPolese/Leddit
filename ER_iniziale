@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-01-05T13:58:07.216Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.66" etag="72CiAeJhEP48C2O8dbtI" version="14.1.8" type="github">
+<mxfile host="app.diagrams.net" modified="2021-01-05T13:59:57.794Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 Edg/87.0.664.66" etag="c-a0rKPm03Qq_g7jhYYu" version="14.1.8" type="github">
   <diagram id="s0jCSw0dyQkaaeBM8Vb1" name="Page-1">
     <mxGraphModel dx="3685" dy="1066" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -910,7 +910,7 @@
             <mxPoint x="-175" y="1440" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="tzLrInA37WdR4DDQ5OMe-179" value="&lt;span style=&quot;font-weight: 700; font-size: 17px;&quot;&gt;contenuto&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=17;" parent="tzLrInA37WdR4DDQ5OMe-178" vertex="1" connectable="0">
+        <mxCell id="tzLrInA37WdR4DDQ5OMe-179" value="&lt;span style=&quot;font-size: 17px;&quot;&gt;contenuto&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=17;fontStyle=1" parent="tzLrInA37WdR4DDQ5OMe-178" vertex="1" connectable="0">
           <mxGeometry x="0.2733" relative="1" as="geometry">
             <mxPoint x="87.48" y="-1.55" as="offset" />
           </mxGeometry>
@@ -1345,7 +1345,7 @@
             <mxPoint x="-175" y="1460.21" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="6rnaTN31lThFr9mzqkX2-10" value="&lt;span style=&quot;font-weight: 700; font-size: 17px;&quot;&gt;votiCommento&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=17;" parent="6rnaTN31lThFr9mzqkX2-9" vertex="1" connectable="0">
+        <mxCell id="6rnaTN31lThFr9mzqkX2-10" value="&lt;span style=&quot;font-size: 17px;&quot;&gt;votiCommento&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=17;fontStyle=1" parent="6rnaTN31lThFr9mzqkX2-9" vertex="1" connectable="0">
           <mxGeometry x="0.2733" relative="1" as="geometry">
             <mxPoint x="87.48" y="-1.55" as="offset" />
           </mxGeometry>
