@@ -5,7 +5,7 @@
 -- Dumped from database version 13.1
 -- Dumped by pg_dump version 13.1
 
--- Started on 2021-01-03 20:45:18
+-- Started on 2021-01-05 12:09:04
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -19,7 +19,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- TOC entry 3159 (class 1262 OID 16641)
+-- TOC entry 3171 (class 1262 OID 16641)
 -- Name: leddit; Type: DATABASE; Schema: -; Owner: postgres
 --
 
@@ -127,7 +127,7 @@ CREATE SEQUENCE public.commento_id_seq
 ALTER TABLE public.commento_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3160 (class 0 OID 0)
+-- TOC entry 3172 (class 0 OID 0)
 -- Dependencies: 209
 -- Name: commento_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -210,7 +210,7 @@ CREATE SEQUENCE public.media_id_seq
 ALTER TABLE public.media_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3161 (class 0 OID 0)
+-- TOC entry 3173 (class 0 OID 0)
 -- Dependencies: 212
 -- Name: media_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -256,7 +256,7 @@ CREATE TABLE public.sub (
 ALTER TABLE public.sub OWNER TO postgres;
 
 --
--- TOC entry 222 (class 1259 OID 16981)
+-- TOC entry 222 (class 1259 OID 17166)
 -- Name: mediavotisub; Type: VIEW; Schema: public; Owner: postgres
 --
 
@@ -303,7 +303,7 @@ CREATE SEQUENCE public.messaggio_id_seq
 ALTER TABLE public.messaggio_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3162 (class 0 OID 0)
+-- TOC entry 3174 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: messaggio_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -326,6 +326,37 @@ CREATE TABLE public.moderatore (
 ALTER TABLE public.moderatore OWNER TO postgres;
 
 --
+-- TOC entry 223 (class 1259 OID 17171)
+-- Name: numerobanpermoderatore; Type: VIEW; Schema: public; Owner: postgres
+--
+
+CREATE VIEW public.numerobanpermoderatore AS
+ SELECT m.sub,
+    m.utente,
+    count(*) AS numeroban
+   FROM (public.moderatore m
+     JOIN public.ban b ON ((((m.utente)::text = (b.moderatore)::text) AND ((m.sub)::text = (b.modsub)::text))))
+  GROUP BY m.sub, m.utente;
+
+
+ALTER TABLE public.numerobanpermoderatore OWNER TO postgres;
+
+--
+-- TOC entry 224 (class 1259 OID 17175)
+-- Name: numerocommentipost; Type: VIEW; Schema: public; Owner: postgres
+--
+
+CREATE VIEW public.numerocommentipost AS
+ SELECT p.id,
+    count(*) AS commenti
+   FROM (public.post p
+     JOIN public.commento c ON ((p.id = c.post)))
+  GROUP BY p.id;
+
+
+ALTER TABLE public.numerocommentipost OWNER TO postgres;
+
+--
 -- TOC entry 206 (class 1259 OID 16707)
 -- Name: post_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -342,7 +373,7 @@ CREATE SEQUENCE public.post_id_seq
 ALTER TABLE public.post_id_seq OWNER TO postgres;
 
 --
--- TOC entry 3163 (class 0 OID 0)
+-- TOC entry 3175 (class 0 OID 0)
 -- Dependencies: 206
 -- Name: post_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -395,7 +426,7 @@ CREATE TABLE public.votocommento (
 ALTER TABLE public.votocommento OWNER TO postgres;
 
 --
--- TOC entry 221 (class 1259 OID 16928)
+-- TOC entry 221 (class 1259 OID 17162)
 -- Name: voticommentoutente; Type: VIEW; Schema: public; Owner: postgres
 --
 
@@ -424,7 +455,7 @@ CREATE TABLE public.votopost (
 ALTER TABLE public.votopost OWNER TO postgres;
 
 --
--- TOC entry 220 (class 1259 OID 16924)
+-- TOC entry 220 (class 1259 OID 17158)
 -- Name: votipostutente; Type: VIEW; Schema: public; Owner: postgres
 --
 
@@ -439,7 +470,7 @@ CREATE VIEW public.votipostutente AS
 ALTER TABLE public.votipostutente OWNER TO postgres;
 
 --
--- TOC entry 2936 (class 2604 OID 16748)
+-- TOC entry 2944 (class 2604 OID 16748)
 -- Name: commento id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -447,7 +478,7 @@ ALTER TABLE ONLY public.commento ALTER COLUMN id SET DEFAULT nextval('public.com
 
 
 --
--- TOC entry 2939 (class 2604 OID 16790)
+-- TOC entry 2947 (class 2604 OID 16790)
 -- Name: media id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -455,7 +486,7 @@ ALTER TABLE ONLY public.media ALTER COLUMN id SET DEFAULT nextval('public.media_
 
 
 --
--- TOC entry 2932 (class 2604 OID 16669)
+-- TOC entry 2940 (class 2604 OID 16669)
 -- Name: messaggio id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -463,7 +494,7 @@ ALTER TABLE ONLY public.messaggio ALTER COLUMN id SET DEFAULT nextval('public.me
 
 
 --
--- TOC entry 2933 (class 2604 OID 16712)
+-- TOC entry 2941 (class 2604 OID 16712)
 -- Name: post id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -471,7 +502,7 @@ ALTER TABLE ONLY public.post ALTER COLUMN id SET DEFAULT nextval('public.post_id
 
 
 --
--- TOC entry 3135 (class 0 OID 16649)
+-- TOC entry 3147 (class 0 OID 16649)
 -- Dependencies: 201
 -- Data for Name: amicizia; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -485,7 +516,7 @@ INSERT INTO public.amicizia VALUES ('gbleything7', 'spetrashov8');
 
 
 --
--- TOC entry 3149 (class 0 OID 16804)
+-- TOC entry 3161 (class 0 OID 16804)
 -- Dependencies: 215
 -- Data for Name: award; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -496,7 +527,7 @@ INSERT INTO public.award VALUES ('smedgwick6', 3, 'p', '2021-01-02');
 
 
 --
--- TOC entry 3153 (class 0 OID 16864)
+-- TOC entry 3165 (class 0 OID 16864)
 -- Dependencies: 219
 -- Data for Name: ban; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -504,10 +535,12 @@ INSERT INTO public.award VALUES ('smedgwick6', 3, 'p', '2021-01-02');
 INSERT INTO public.ban VALUES ('gaming', 'rsatterfitt3', 'kharrow0', 'gaming', '2021-01-02', '2021-01-12', 'Commenti inappropriati.');
 INSERT INTO public.ban VALUES ('pictures', 'rsatterfitt3', 'kharrow0', 'pictures', '2021-01-02', '2021-01-12', 'Commenti inappropriati.');
 INSERT INTO public.ban VALUES ('italy', 'rsatterfitt3', 'gbleything7', 'italy', '2021-01-02', NULL, 'Commenti inappropriati.');
+INSERT INTO public.ban VALUES ('gaming', 'fbagnal4', 'kharrow0', 'gaming', '2021-01-04', NULL, 'Commenti inappropriati');
+INSERT INTO public.ban VALUES ('gaming', 'rsatterfitt3', 'kharrow0', 'gaming', '2021-01-04', NULL, 'Commenti inappropriati');
 
 
 --
--- TOC entry 3144 (class 0 OID 16745)
+-- TOC entry 3156 (class 0 OID 16745)
 -- Dependencies: 210
 -- Data for Name: commento; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -516,10 +549,16 @@ INSERT INTO public.commento VALUES (0, '2021-01-01', 'Contenuto del commento', N
 INSERT INTO public.commento VALUES (2, '2021-01-01', 'Contenuto del commento', 2, 'oscrannagej', 3, B'0', 3);
 INSERT INTO public.commento VALUES (1, '2021-01-01', 'Contenuto del commento', 1, 'plidsterd', 3, B'0', -1);
 INSERT INTO public.commento VALUES (3, '2021-01-01', 'Contenuto del commento', NULL, 'oscrannagej', 0, B'0', 4);
+INSERT INTO public.commento VALUES (4, '2021-01-04', 'Contenuto del commento', NULL, 'rsatterfitt3', 0, B'0', 0);
+INSERT INTO public.commento VALUES (5, '2021-01-04', 'Contenuto del commento', NULL, 'rsatterfitt3', 2, B'0', 0);
+INSERT INTO public.commento VALUES (6, '2021-01-04', 'Contenuto del commento', NULL, 'rsatterfitt3', 1, B'0', 0);
+INSERT INTO public.commento VALUES (7, '2021-01-04', 'Contenuto del commento', NULL, 'gvasyutin5', 0, B'0', 0);
+INSERT INTO public.commento VALUES (8, '2021-01-04', 'Contenuto del commento', NULL, 'fbagnal4', 2, B'0', 0);
+INSERT INTO public.commento VALUES (9, '2021-01-04', 'Contenuto del commento', NULL, 'smedgwick6', 1, B'0', 0);
 
 
 --
--- TOC entry 3150 (class 0 OID 16824)
+-- TOC entry 3162 (class 0 OID 16824)
 -- Dependencies: 216
 -- Data for Name: feed; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -529,7 +568,7 @@ INSERT INTO public.feed VALUES ('kharrow0', 'subs');
 
 
 --
--- TOC entry 3151 (class 0 OID 16834)
+-- TOC entry 3163 (class 0 OID 16834)
 -- Dependencies: 217
 -- Data for Name: include; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -543,7 +582,7 @@ INSERT INTO public.include VALUES ('subs', 'kharrow0', 'PlayStation');
 
 
 --
--- TOC entry 3139 (class 0 OID 16692)
+-- TOC entry 3151 (class 0 OID 16692)
 -- Dependencies: 205
 -- Data for Name: iscrizione; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -564,16 +603,17 @@ INSERT INTO public.iscrizione VALUES ('squinet9', 'gaming');
 
 
 --
--- TOC entry 3147 (class 0 OID 16787)
+-- TOC entry 3159 (class 0 OID 16787)
 -- Dependencies: 213
 -- Data for Name: media; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 INSERT INTO public.media VALUES (1, 'Funny dog', NULL, 'dog.jpg', 'foto', 'dogs pic funny');
+INSERT INTO public.media VALUES (0, NULL, NULL, 'italy.mp4', 'video', 'funny italy italia');
 
 
 --
--- TOC entry 3137 (class 0 OID 16666)
+-- TOC entry 3149 (class 0 OID 16666)
 -- Dependencies: 203
 -- Data for Name: messaggio; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -585,7 +625,7 @@ INSERT INTO public.messaggio VALUES (3, '2020-12-25', '":)"', 'gbleything7', 'as
 
 
 --
--- TOC entry 3152 (class 0 OID 16849)
+-- TOC entry 3164 (class 0 OID 16849)
 -- Dependencies: 218
 -- Data for Name: moderatore; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -601,7 +641,7 @@ INSERT INTO public.moderatore VALUES ('asawerse', 'italy', '2021-01-02');
 
 
 --
--- TOC entry 3141 (class 0 OID 16709)
+-- TOC entry 3153 (class 0 OID 16709)
 -- Dependencies: 207
 -- Data for Name: post; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -614,7 +654,7 @@ INSERT INTO public.post VALUES (4, 'Consigli', '2021-01-03', 'Contenuto del post
 
 
 --
--- TOC entry 3148 (class 0 OID 16799)
+-- TOC entry 3160 (class 0 OID 16799)
 -- Dependencies: 214
 -- Data for Name: prezzo; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -625,7 +665,7 @@ INSERT INTO public.prezzo VALUES ('p', 10.5);
 
 
 --
--- TOC entry 3138 (class 0 OID 16682)
+-- TOC entry 3150 (class 0 OID 16682)
 -- Dependencies: 204
 -- Data for Name: sub; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -638,7 +678,7 @@ INSERT INTO public.sub VALUES ('PlayStation', '2020-01-02', 'Everything PS', B'0
 
 
 --
--- TOC entry 3134 (class 0 OID 16642)
+-- TOC entry 3146 (class 0 OID 16642)
 -- Dependencies: 200
 -- Data for Name: utente; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -666,7 +706,7 @@ INSERT INTO public.utente VALUES ('oscrannagej', 'As2dAxD', 'wgallantj@joomla.or
 
 
 --
--- TOC entry 3145 (class 0 OID 16770)
+-- TOC entry 3157 (class 0 OID 16770)
 -- Dependencies: 211
 -- Data for Name: votocommento; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -687,7 +727,7 @@ INSERT INTO public.votocommento VALUES ('kharrow0', 3, 1);
 
 
 --
--- TOC entry 3142 (class 0 OID 16728)
+-- TOC entry 3154 (class 0 OID 16728)
 -- Dependencies: 208
 -- Data for Name: votopost; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -710,16 +750,16 @@ INSERT INTO public.votopost VALUES ('kharrow0', 4, 1);
 
 
 --
--- TOC entry 3164 (class 0 OID 0)
+-- TOC entry 3176 (class 0 OID 0)
 -- Dependencies: 209
 -- Name: commento_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.commento_id_seq', 1, false);
+SELECT pg_catalog.setval('public.commento_id_seq', 1, true);
 
 
 --
--- TOC entry 3165 (class 0 OID 0)
+-- TOC entry 3177 (class 0 OID 0)
 -- Dependencies: 212
 -- Name: media_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -728,7 +768,7 @@ SELECT pg_catalog.setval('public.media_id_seq', 1, false);
 
 
 --
--- TOC entry 3166 (class 0 OID 0)
+-- TOC entry 3178 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: messaggio_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -737,7 +777,7 @@ SELECT pg_catalog.setval('public.messaggio_id_seq', 1, false);
 
 
 --
--- TOC entry 3167 (class 0 OID 0)
+-- TOC entry 3179 (class 0 OID 0)
 -- Dependencies: 206
 -- Name: post_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -746,7 +786,7 @@ SELECT pg_catalog.setval('public.post_id_seq', 1, false);
 
 
 --
--- TOC entry 2944 (class 2606 OID 16653)
+-- TOC entry 2952 (class 2606 OID 16653)
 -- Name: amicizia amicizia_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -755,7 +795,7 @@ ALTER TABLE ONLY public.amicizia
 
 
 --
--- TOC entry 2964 (class 2606 OID 16808)
+-- TOC entry 2972 (class 2606 OID 16808)
 -- Name: award award_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -764,7 +804,16 @@ ALTER TABLE ONLY public.award
 
 
 --
--- TOC entry 2956 (class 2606 OID 16754)
+-- TOC entry 2981 (class 2606 OID 17001)
+-- Name: ban ban_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ban
+    ADD CONSTRAINT ban_pkey PRIMARY KEY (sub, utente, databan);
+
+
+--
+-- TOC entry 2964 (class 2606 OID 16754)
 -- Name: commento commento_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -773,7 +822,7 @@ ALTER TABLE ONLY public.commento
 
 
 --
--- TOC entry 2967 (class 2606 OID 16828)
+-- TOC entry 2975 (class 2606 OID 16828)
 -- Name: feed feed_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -782,7 +831,7 @@ ALTER TABLE ONLY public.feed
 
 
 --
--- TOC entry 2969 (class 2606 OID 16838)
+-- TOC entry 2977 (class 2606 OID 16838)
 -- Name: include include_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -791,7 +840,7 @@ ALTER TABLE ONLY public.include
 
 
 --
--- TOC entry 2950 (class 2606 OID 16696)
+-- TOC entry 2958 (class 2606 OID 16696)
 -- Name: iscrizione iscrizione_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -800,7 +849,7 @@ ALTER TABLE ONLY public.iscrizione
 
 
 --
--- TOC entry 2960 (class 2606 OID 16793)
+-- TOC entry 2968 (class 2606 OID 16793)
 -- Name: media media_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -809,7 +858,7 @@ ALTER TABLE ONLY public.media
 
 
 --
--- TOC entry 2946 (class 2606 OID 16671)
+-- TOC entry 2954 (class 2606 OID 16671)
 -- Name: messaggio messaggio_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -818,7 +867,7 @@ ALTER TABLE ONLY public.messaggio
 
 
 --
--- TOC entry 2971 (class 2606 OID 16853)
+-- TOC entry 2979 (class 2606 OID 16853)
 -- Name: moderatore moderatore_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -827,7 +876,7 @@ ALTER TABLE ONLY public.moderatore
 
 
 --
--- TOC entry 2952 (class 2606 OID 16717)
+-- TOC entry 2960 (class 2606 OID 16717)
 -- Name: post post_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -836,7 +885,7 @@ ALTER TABLE ONLY public.post
 
 
 --
--- TOC entry 2962 (class 2606 OID 16803)
+-- TOC entry 2970 (class 2606 OID 16803)
 -- Name: prezzo prezzo_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -845,7 +894,7 @@ ALTER TABLE ONLY public.prezzo
 
 
 --
--- TOC entry 2948 (class 2606 OID 16686)
+-- TOC entry 2956 (class 2606 OID 16686)
 -- Name: sub sub_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -854,7 +903,7 @@ ALTER TABLE ONLY public.sub
 
 
 --
--- TOC entry 2942 (class 2606 OID 16648)
+-- TOC entry 2950 (class 2606 OID 16648)
 -- Name: utente utente_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -863,7 +912,7 @@ ALTER TABLE ONLY public.utente
 
 
 --
--- TOC entry 2958 (class 2606 OID 16774)
+-- TOC entry 2966 (class 2606 OID 16774)
 -- Name: votocommento votocommento_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -872,7 +921,7 @@ ALTER TABLE ONLY public.votocommento
 
 
 --
--- TOC entry 2954 (class 2606 OID 16732)
+-- TOC entry 2962 (class 2606 OID 16732)
 -- Name: votopost votopost_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -881,7 +930,7 @@ ALTER TABLE ONLY public.votopost
 
 
 --
--- TOC entry 2972 (class 1259 OID 16932)
+-- TOC entry 2982 (class 1259 OID 16932)
 -- Name: indiceban; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -889,7 +938,7 @@ CREATE INDEX indiceban ON public.ban USING btree (utente);
 
 
 --
--- TOC entry 2965 (class 1259 OID 16933)
+-- TOC entry 2973 (class 1259 OID 16933)
 -- Name: indiceperutentipremium; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -897,7 +946,7 @@ CREATE INDEX indiceperutentipremium ON public.award USING btree (utente);
 
 
 --
--- TOC entry 2973 (class 2606 OID 16654)
+-- TOC entry 2983 (class 2606 OID 16654)
 -- Name: amicizia amicizia_utente1_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -906,7 +955,7 @@ ALTER TABLE ONLY public.amicizia
 
 
 --
--- TOC entry 2974 (class 2606 OID 16659)
+-- TOC entry 2984 (class 2606 OID 16659)
 -- Name: amicizia amicizia_utente2_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -915,7 +964,7 @@ ALTER TABLE ONLY public.amicizia
 
 
 --
--- TOC entry 2991 (class 2606 OID 16814)
+-- TOC entry 3001 (class 2606 OID 16814)
 -- Name: award award_commento_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -924,7 +973,7 @@ ALTER TABLE ONLY public.award
 
 
 --
--- TOC entry 2992 (class 2606 OID 16819)
+-- TOC entry 3002 (class 2606 OID 16819)
 -- Name: award award_tipo_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -933,7 +982,7 @@ ALTER TABLE ONLY public.award
 
 
 --
--- TOC entry 2990 (class 2606 OID 16809)
+-- TOC entry 3000 (class 2606 OID 16809)
 -- Name: award award_utente_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -942,7 +991,7 @@ ALTER TABLE ONLY public.award
 
 
 --
--- TOC entry 3000 (class 2606 OID 16877)
+-- TOC entry 3010 (class 2606 OID 16877)
 -- Name: ban ban_moderatore_modsub_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -951,7 +1000,7 @@ ALTER TABLE ONLY public.ban
 
 
 --
--- TOC entry 2998 (class 2606 OID 16867)
+-- TOC entry 3008 (class 2606 OID 16867)
 -- Name: ban ban_sub_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -960,7 +1009,7 @@ ALTER TABLE ONLY public.ban
 
 
 --
--- TOC entry 2999 (class 2606 OID 16872)
+-- TOC entry 3009 (class 2606 OID 16872)
 -- Name: ban ban_utente_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -969,7 +1018,7 @@ ALTER TABLE ONLY public.ban
 
 
 --
--- TOC entry 2986 (class 2606 OID 16765)
+-- TOC entry 2996 (class 2606 OID 16765)
 -- Name: commento commento_post_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -978,7 +1027,7 @@ ALTER TABLE ONLY public.commento
 
 
 --
--- TOC entry 2984 (class 2606 OID 16755)
+-- TOC entry 2994 (class 2606 OID 16755)
 -- Name: commento commento_risposta_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -987,7 +1036,7 @@ ALTER TABLE ONLY public.commento
 
 
 --
--- TOC entry 2985 (class 2606 OID 16760)
+-- TOC entry 2995 (class 2606 OID 16760)
 -- Name: commento commento_utente_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -996,7 +1045,7 @@ ALTER TABLE ONLY public.commento
 
 
 --
--- TOC entry 2993 (class 2606 OID 16829)
+-- TOC entry 3003 (class 2606 OID 16829)
 -- Name: feed feed_utente_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1005,7 +1054,7 @@ ALTER TABLE ONLY public.feed
 
 
 --
--- TOC entry 2995 (class 2606 OID 16844)
+-- TOC entry 3005 (class 2606 OID 16844)
 -- Name: include include_sub_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1014,7 +1063,7 @@ ALTER TABLE ONLY public.include
 
 
 --
--- TOC entry 2994 (class 2606 OID 16839)
+-- TOC entry 3004 (class 2606 OID 16839)
 -- Name: include include_utente_feed_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1023,7 +1072,7 @@ ALTER TABLE ONLY public.include
 
 
 --
--- TOC entry 2979 (class 2606 OID 16702)
+-- TOC entry 2989 (class 2606 OID 16702)
 -- Name: iscrizione iscrizione_sub_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1032,7 +1081,7 @@ ALTER TABLE ONLY public.iscrizione
 
 
 --
--- TOC entry 2978 (class 2606 OID 16697)
+-- TOC entry 2988 (class 2606 OID 16697)
 -- Name: iscrizione iscrizione_utente_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1041,7 +1090,7 @@ ALTER TABLE ONLY public.iscrizione
 
 
 --
--- TOC entry 2989 (class 2606 OID 16794)
+-- TOC entry 2999 (class 2606 OID 16794)
 -- Name: media media_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1050,7 +1099,7 @@ ALTER TABLE ONLY public.media
 
 
 --
--- TOC entry 2976 (class 2606 OID 16677)
+-- TOC entry 2986 (class 2606 OID 16677)
 -- Name: messaggio messaggio_destinatario_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1059,7 +1108,7 @@ ALTER TABLE ONLY public.messaggio
 
 
 --
--- TOC entry 2975 (class 2606 OID 16672)
+-- TOC entry 2985 (class 2606 OID 16672)
 -- Name: messaggio messaggio_mittente_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1068,7 +1117,7 @@ ALTER TABLE ONLY public.messaggio
 
 
 --
--- TOC entry 2997 (class 2606 OID 16859)
+-- TOC entry 3007 (class 2606 OID 16859)
 -- Name: moderatore moderatore_sub_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1077,7 +1126,7 @@ ALTER TABLE ONLY public.moderatore
 
 
 --
--- TOC entry 2996 (class 2606 OID 16854)
+-- TOC entry 3006 (class 2606 OID 16854)
 -- Name: moderatore moderatore_utente_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1086,7 +1135,7 @@ ALTER TABLE ONLY public.moderatore
 
 
 --
--- TOC entry 2980 (class 2606 OID 16718)
+-- TOC entry 2990 (class 2606 OID 16718)
 -- Name: post post_creatore_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1095,7 +1144,7 @@ ALTER TABLE ONLY public.post
 
 
 --
--- TOC entry 2981 (class 2606 OID 16723)
+-- TOC entry 2991 (class 2606 OID 16723)
 -- Name: post post_sub_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1104,7 +1153,7 @@ ALTER TABLE ONLY public.post
 
 
 --
--- TOC entry 2977 (class 2606 OID 16687)
+-- TOC entry 2987 (class 2606 OID 16687)
 -- Name: sub sub_creatore_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1113,7 +1162,7 @@ ALTER TABLE ONLY public.sub
 
 
 --
--- TOC entry 2988 (class 2606 OID 16780)
+-- TOC entry 2998 (class 2606 OID 16780)
 -- Name: votocommento votocommento_commento_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1122,7 +1171,7 @@ ALTER TABLE ONLY public.votocommento
 
 
 --
--- TOC entry 2987 (class 2606 OID 16775)
+-- TOC entry 2997 (class 2606 OID 16775)
 -- Name: votocommento votocommento_utente_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1131,7 +1180,7 @@ ALTER TABLE ONLY public.votocommento
 
 
 --
--- TOC entry 2983 (class 2606 OID 16738)
+-- TOC entry 2993 (class 2606 OID 16738)
 -- Name: votopost votopost_post_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1140,7 +1189,7 @@ ALTER TABLE ONLY public.votopost
 
 
 --
--- TOC entry 2982 (class 2606 OID 16733)
+-- TOC entry 2992 (class 2606 OID 16733)
 -- Name: votopost votopost_utente_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1148,9 +1197,74 @@ ALTER TABLE ONLY public.votopost
     ADD CONSTRAINT votopost_utente_fkey FOREIGN KEY (utente) REFERENCES public.utente(username);
 
 
--- Completed on 2021-01-03 20:45:20
+-- Completed on 2021-01-05 12:09:07
 
 --
 -- PostgreSQL database dump complete
 --
 
+-- QUERY 1
+select username as "Proprietario", f.nome as "Nome feed", i.sub as "Sub incluso"
+from utente u join feed f on u.username=f.utente join include i on (f.nome=i.feed and f.utente=i.utente)
+group by username, f.nome, i.sub
+order by username, f.nome;
+
+
+-- QUERY 2
+select s.nome as “Sub”,
+(select count(*) from post p where p.sub=s.nome group by s.nome) as "Numero post",
+(select count(*) from commento c, post p where c.post=p.id and p.sub=s.nome group by s.nome) as "Numero commenti" from sub s;
+
+
+-- QUERY 3
+drop view if exists votiPostUtente;
+create view votiPostUtente as select username, sum(valore) as votiPost from utente u join votoPost v on u.username=v.utente group by username;
+
+drop view if exists votiCommentoUtente;
+create view votiCommentoUtente as select username, sum(valore) as votiCommento from utente u join votoCommento v on u.username=v.utente group by username;
+
+select u.username, coalesce(votiPost+votiCommento, 0) as karma from utente u left join votiPostUtente vp on u.username=vp.username
+left join votiCommentoUtente vc on u.username=vc.username group by u.username, votiPost, votiCommento order by karma desc;
+
+
+-- QUERY 4
+drop view if exists mediaVotiSub;
+create view mediaVotiSub as select nome, cast(avg(numeroVoti)as decimal(100,2)) as media from sub s join post p on s.nome=p.sub group by s.nome;
+
+select s.nome, (select media from mediaVotiSub m where m.nome=s.nome), username, p.numeroVoti as voto
+from utente u join post p on u.username=p.creatore join sub s on p.sub=s.nome where p.numeroVoti>(select media from mediaVotiSub m where m.nome=s.nome)
+order by (s.nome, p.numeroVoti);
+
+
+-- QUERY 5
+drop view if exists numeroBanPerModeratore;
+create view numeroBanPerModeratore as
+select m.sub, m.utente, count(*) as numeroBan from moderatore m join ban b on (m.utente=b.moderatore and m.sub=b.modSub)
+group by m.sub, m.utente;
+
+select s.nome, m.utente as moderatore, numeroBan 
+from sub s join moderatore m on s.nome=m.sub join numeroBanPerModeratore n on (n.utente=m.utente and n.sub=s.nome) 
+order by s.nome, m.utente;
+
+
+-- QUERY 6
+drop view if exists numeroCommentiPost;
+create view numeroCommentiPost as
+select p.id, count(*) as "commenti" 
+from post p join commento c on p.id=c.post 
+group by p.id;
+
+select m.tipo, titolo, creatore, numeroVoti as "voti", commenti 
+from numeroCommentiPost n join post p 
+on n.id=p.id join media m on p.id=m.id 
+where tag like '%funny%'; (si assume il termine “funny” come input dell’utente)
+
+
+-- INDICE 1
+drop index if exists indiceBan;
+create index indiceBan on Ban(utente);
+
+
+-- INDICE 2
+drop index if exists indicePerUtentiPremium;
+create index indicePerUtentiPremium on Award(utente);
